@@ -1,0 +1,66 @@
+# Необов’язковий робочий процес GitHub Actions: тести → перевірка типів → публікація на GitHub Pages.
+# GitHub запускає робочі процеси лише з папки .github/workflows/ — тому в корені лежить копія.
+# З iPhone: Add file → Create new file → у полі назви наберіть .github/workflows/pages-deploy.yml
+# і вставте цей текст. Потім: Settings → Pages → Source: «GitHub Actions». Докладно — README, розділ 5.
+# Статус: на реальному репозиторії ще не запускався (див. README, «Що перевірено, а що ні»).
+
+name: Тести та публікація
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Отримати код
+        uses: actions/checkout@v6
+
+      - name: Встановити Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Тести
+        run: node --test
+
+      - name: Перевірка типів
+        run: |
+          npm install --no-audit --no-fund
+          npm run check
+
+      - name: Зібрати файли сайту
+        run: |
+          mkdir _site
+          cp *.html *.css manifest.webmanifest *.js *.svg *.png *.webp _site/
+          ls -la _site
+
+      - name: Налаштувати Pages
+        uses: actions/configure-pages@v6
+
+      - name: Передати файли сайту
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Опублікувати
+        id: deployment
+        uses: actions/deploy-pages@v5

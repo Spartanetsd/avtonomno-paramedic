@@ -1,79 +1,222 @@
 <!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#11241f">
-  <meta name="description" content="Автономно — практичний гід для ситуацій, коли немає світла, води або газу. Підхід, який рекомендують поліцейські-парамедики.">
-  <title>Автономно — коли зникає звичне, має залишатися план</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Автономно</title>
+<meta name="description" content="Практичні й безпечні рішення, коли немає світла, газу, опалення, води чи зв’язку, і під час повітряної тривоги. Працює без інтернету.">
+<meta name="theme-color" content="#F8F5EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1424" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Автономно">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="./app.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="Автономно — на головну">
-        <span class="brand-mark" aria-hidden="true"><span class="brand-mark-core"></span></span>
-        <span class="brand-name">АВТОНОМНО<span class="brand-dot">.</span></span>
-      </a>
-      <div class="header-note"><span class="online-dot" aria-hidden="true"></span> Незалежний практичний гід</div>
-    </div>
-  </header>
-  <main id="top">
-    <section class="hero container" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="eyebrow-line"></span> Готовність починається з простого</div>
-        <h1 id="hero-title">Коли зникає звичне, <em>має залишатися план.</em></h1>
-        <p class="lead">Немає світла, води чи газу? «Автономно» допомагає знайти зрозумілі рішення — від найпростіших і найдоступніших до складніших.</p>
-        <a href="#topics" class="primary-link">Дізнатися, з чого почати <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg></a>
-        <div class="hero-traits" aria-label="Принципи проєкту">
-          <span><i></i> Спершу безпека</span><span><i></i> Без зайвих витрат</span><span><i></i> Покрокові дії</span>
-        </div>
-      </div>
-      <figure class="hero-photo">
-        <img src="policeman-paramedic.webp" alt="Поліцейський-парамедик зі спорядженням у службовому броньованому автомобілі" width="477" height="710">
-        <figcaption>
-          <span class="photo-tag">Досвід, що має значення</span>
-          <span class="photo-caption">На виїзді. Поліцейський-парамедик Донеччини.</span>
-          <span class="photo-credit">Фото: Національна поліція України</span>
-        </figcaption>
-      </figure>
-    </section>
+<a class="skip" href="#main">Перейти до вмісту</a>
 
-    <section class="endorsement" aria-labelledby="endorsement-title">
-      <div class="container endorsement-inner">
-        <div class="endorsement-main">
-          <div class="eyebrow eyebrow-light"><span class="eyebrow-line"></span> Практичний досвід Донеччини</div>
-          <h2 id="endorsement-title">Рекомендують <span>поліцейські-парамедики</span></h2>
-          <p>У ситуації, коли ресурси обмежені, важливий не найдорожчий пристрій, а правильний порядок дій. Оціни небезпеку, обери безпечне рішення з того, що маєш, і дій послідовно.</p>
-        </div>
-        <div class="endorsement-principles" aria-label="Три принципи">
-          <div class="principle"><span class="principle-number">01</span><div><strong>Безпека передусім</strong><p>Жодне побутове рішення не варте пожежі, отруєння чи травми.</p></div></div>
-          <div class="principle"><span class="principle-number">02</span><div><strong>Просте — спочатку</strong><p>Використовуй доступне, не ускладнюй без потреби.</p></div></div>
-          <div class="principle"><span class="principle-number">03</span><div><strong>План замість паніки</strong><p>Короткі послідовні кроки, зрозумілі навіть у стресі.</p></div></div>
-        </div>
-      </div>
-      <div class="container"><p class="independence-note">Незалежний інформаційний проєкт. Згадка про фахівців не означає офіційного схвалення чи партнерства з Національною поліцією України.</p></div>
-    </section>
+<header class="top">
+  <a class="brand" href="#/" aria-label="Автономно — на головну">
+    <svg class="brand-mark" aria-hidden="true"><use href="#logo"></use></svg>
+    <span>АВТОНОМНО</span>
+  </a>
+  <a class="sh-chip" id="sh-chip" href="#/shelter" aria-label="Режим укриття" hidden></a>
+  <a class="top-btn" href="#/safety" aria-label="Безпека та екстрені номери">
+    <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg><span>Безпека</span>
+  </a>
+</header>
 
-    <section id="topics" class="topics container" aria-labelledby="topics-title">
-      <div class="topics-heading">
-        <div><div class="eyebrow"><span class="eyebrow-line"></span> Потрібне саме зараз</div><h2 id="topics-title">Головне — знати, що робити далі.</h2></div>
-        <p>Жодної показної «виживальщини». Лише практичні напрями, з яких починається автономність.</p>
-      </div>
-      <div class="topic-grid">
-        <article class="topic-card"><span class="topic-num">01 / ЕНЕРГІЯ</span><span class="topic-icon" aria-hidden="true">↯</span><h3>Світло та зв’язок</h3><p>Як берегти заряд телефона, живити інтернет і правильно визначати пріоритети.</p></article>
-        <article class="topic-card"><span class="topic-num">02 / ПОБУТ</span><span class="topic-icon" aria-hidden="true">◌</span><h3>Вода й тепло</h3><p>Що підготувати та як обирати безпечні способи обігріву й забезпечення водою.</p></article>
-        <article class="topic-card"><span class="topic-num">03 / ДОПОМОГА</span><span class="topic-icon" aria-hidden="true">＋</span><h3>Перша допомога</h3><p>Базова готовність, вміст аптечки та правильний порядок перших дій.</p></article>
-        <article class="topic-card"><span class="topic-num">04 / ПЛАН</span><span class="topic-icon" aria-hidden="true">☷</span><h3>Перші 24 години</h3><p>Пріоритети для родини, запасів і зв’язку, коли звичні служби не працюють.</p></article>
-      </div>
-    </section>
+<main id="main" tabindex="-1">
+  <div class="boot">
+    <p class="greet">Завантаження…</p>
+    <noscript><p>Для роботи застосунку потрібен JavaScript. Увімкніть його в налаштуваннях браузера.</p></noscript>
+  </div>
+</main>
 
-    <div class="closing container">
-      <div class="closing-rule"></div>
-      <p>Не все можна передбачити.<br><strong>Але до найважливішого можна підготуватися.</strong></p>
-      <span>АВТОНОМНО / ПРАКТИЧНІ РІШЕННЯ</span>
-    </div>
-  </main>
-  <footer class="site-footer"><div class="container footer-inner"><span>© 2026 Автономно. Незалежний проєкт.</span><span>Поради не замінюють інструкцій служб порятунку чи медичних фахівців.</span></div></footer>
+<nav class="tabbar" aria-label="Основна навігація">
+  <a href="#/" data-tab="home"><svg class="ic" aria-hidden="true"><use href="#i-home"></use></svg><span>Рішення</span></a>
+  <a href="#/shelter" data-tab="shelter"><svg class="ic" aria-hidden="true"><use href="#i-shelter"></use></svg><span>Укриття</span></a>
+  <a href="#/res" data-tab="res"><svg class="ic" aria-hidden="true"><use href="#i-list"></use></svg><span>Готовність</span></a>
+  <a href="#/calc" data-tab="calc"><svg class="ic" aria-hidden="true"><use href="#i-calc"></use></svg><span>Розрахунки</span></a>
+</nav>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+  // Якщо модулі не запустилися (дуже старий браузер) — чесно повідомити.
+  setTimeout(function () {
+    if (!window.__avReady) {
+      var m = document.getElementById('main');
+      if (m) m.innerHTML = '<div class="boot"><h1>Не вдалося запустити застосунок</h1><p>Оновіть браузер (Safari, Chrome, Firefox останніх версій) і відкрийте сторінку ще раз.</p></div>';
+    }
+  }, 8000);
+</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- Логотип: дім і тепле світло -->
+  <symbol id="logo" viewBox="0 0 32 32">
+    <rect width="32" height="32" rx="8" style="fill:var(--logo-bg)"/>
+    <path d="M7 15.5L16 8l9 7.5V24a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 7 24z" style="fill:none;stroke:var(--logo-fg);stroke-width:2.2;stroke-linejoin:round"/>
+    <circle cx="16" cy="18.5" r="3.2" style="fill:var(--logo-dot)"/>
+  </symbol>
+
+  <!-- Іконки інтерфейсу 24×24 -->
+  <symbol id="i-back" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></g></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></g></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></g></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></g></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></g></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></g></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></g></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></g></symbol>
+  <symbol id="i-star-f" viewBox="0 0 24 24"><g fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></g></symbol>
+  <symbol id="i-aid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6.5" width="17" height="13.5" rx="3"/><path d="M9 6.5V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v1.5"/><path d="M12 10.2v6.1M8.95 13.25h6.1"/></g></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5C7.2 17.3 3.5 13.9 3.5 9.6 3.5 7 5.5 5 8 5c1.7 0 3.1.9 4 2.3.9-1.4 2.3-2.3 4-2.3 2.5 0 4.5 2 4.5 4.6 0 4.3-3.7 7.7-8.5 10.9"/><path d="M6.5 12.5h3l1.3-2.5 2.2 5 1.4-2.5h3"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.4-3 8.1-7 9.5-4-1.4-7-5.1-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></g></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h11a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></g></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.6v.2"/></g></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5L2.8 19.5h18.4z"/><path d="M12 10v4.5M12 17.2v.2"/></g></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.2 3h7.6L21 8.2v7.6L15.8 21H8.2L3 15.8V8.2z"/><path d="M12 7.5v6M12 16.5v.3"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></g></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.4c-.6-.9-1.6-1.4-2.8-1.4-1.7 0-2.8.9-2.8 2s1 1.6 2.8 2 2.8.9 2.8 2-1.1 2-2.8 2c-1.3 0-2.3-.5-2.9-1.4M12 6.5V8m0 8v1.5"/></g></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></g></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></g></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 17a8 8 0 1 1 16 0"/><path d="M12 17l4-5"/></g></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 4l9 4.5-9 4.5-9-4.5z"/><path d="M3 13l9 4.5 9-4.5"/></g></symbol>
+  <symbol id="i-atom" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="1.6" fill="currentColor"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"/></g></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></g></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></g></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5"/><path d="M4.5 19.5h15"/></g></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M7.5 8.5L12 4l4.5 4.5"/><path d="M4.5 19.5h15"/></g></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13"/><path d="M10 11v5.5M14 11v5.5"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.3a11 11 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z"/></g></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-13.7 5.7M4 12a8 8 0 0 1 13.7-5.7"/><path d="M18 3v3.6h-3.6M6 21v-3.6h3.6"/></g></symbol>
+  <symbol id="i-offline" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 8.5a4 4 0 0 1-.5 10z"/><path d="M9.5 13.5l2 2 3.5-3.5"/></g></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="7.5" width="16" height="9" rx="2"/><path d="M21 10.5v3M6.5 10.5v3M9.5 10.5v3"/></g></symbol>
+  <symbol id="i-thermo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5a2 2 0 0 1 4 0v9.3a4 4 0 1 1-4 0z"/><path d="M12 9v6.5"/></g></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5s6 6.4 6 10.5a6 6 0 0 1-12 0c0-4.1 6-10.5 6-10.5z"/></g></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/></g></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></g></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5L12 4l8 6.5V20H4z"/><path d="M9.5 20v-5.5h5V20"/></g></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3.5 7.5L12 3.5l8.5 4v9L12 20.5l-8.5-4z"/><path d="M3.5 7.5L12 11.5l8.5-4M12 11.5v9"/></g></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M9.5 4.5L12 6.5l2.5-2M9.5 19.5L12 17.5l2.5 2"/></g></symbol>
+  <symbol id="i-sprout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5V11"/><path d="M12 11c0-3.5-2.5-6-6.5-6 0 3.6 2.6 6 6.5 6z"/><path d="M12 13.5c0-3 2.2-5.5 6.5-5.5 0 3.3-2.6 5.5-6.5 5.5z"/></g></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-14 15-14 0 9-6 14-13 14"/><path d="M5 19l8-8"/></g></symbol>
+
+  <symbol id="i-shelter" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><path d="M5.5 20.5V12a6.5 6.5 0 0 1 13 0v8.5"/><path d="M9.5 20.5V16a2.5 2.5 0 0 1 5 0v4.5"/></g></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 6.5h9.5M10.5 12h9.5M10.5 17.5h9.5"/><path d="M3.8 6.4l1.5 1.5 2.5-2.7M3.8 11.9l1.5 1.5 2.5-2.7M3.8 17.4l1.5 1.5 2.5-2.7"/></g></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="7" width="15" height="13.5" rx="3"/><path d="M9 7V5.5A2 2 0 0 1 11 3.5h2a2 2 0 0 1 2 2V7"/><path d="M4.5 12.5h15"/><path d="M10.5 12.5v2.5h3v-2.5"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1z"/></g></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5c2.4-2 4.6-2 7 0s4.6 2 7 0c1.2-1 2.4-1.4 4-1"/><path d="M3 15.5c2.4-2 4.6-2 7 0s4.6 2 7 0c1.2-1 2.4-1.4 4-1"/></g></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9.2a4 4 0 0 1 0 5.6M18.3 6.6a7.6 7.6 0 0 1 0 10.8"/></g></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v11"/><path d="M8 7.5l4-4 4 4"/><path d="M6.5 11h-1v8.5a1.5 1.5 0 0 0 1.5 1.5h10a1.5 1.5 0 0 0 1.5-1.5V11h-1"/></g></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14h10v6.5H7z"/></g></symbol>
+
+  <!-- Ілюстрації категорій 64×64 (двотонні, без драматизму) -->
+  <symbol id="il-heat" viewBox="0 0 64 64">
+    <path d="M11 31L32 13l21 18v22a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3z" style="fill:var(--illo-b)"/>
+    <rect x="24" y="34" width="16" height="15" rx="3.5" style="fill:var(--illo-a)"/>
+    <path d="M8 32L32 11l24 21" style="fill:none;stroke:var(--illo-s);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round"/>
+    <circle cx="32" cy="41.5" r="3.6" style="fill:var(--illo-hi)"/>
+  </symbol>
+  <symbol id="il-food" viewBox="0 0 64 64">
+    <path d="M14 31h36v12a11 11 0 0 1-11 11H25a11 11 0 0 1-11-11z" style="fill:var(--illo-a)"/>
+    <path d="M10 31h44M14 37h-4M50 37h4" style="fill:none;stroke:var(--illo-s);stroke-width:3.2;stroke-linecap:round"/>
+    <path d="M25 24c-2-2.5 2-4.5 0-7.5M33 24c-2-2.5 2-4.5 0-7.5M41 24c-2-2.5 2-4.5 0-7.5" style="fill:none;stroke:var(--illo-b);stroke-width:3;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="il-water" viewBox="0 0 64 64">
+    <ellipse cx="32" cy="56" rx="16" ry="3" style="fill:var(--illo-a);opacity:.55"/>
+    <path d="M32 7s16 17.5 16 28.5a16 16 0 0 1-32 0C16 24.5 32 7 32 7z" style="fill:var(--illo-b)"/>
+    <path d="M24.5 37a8 8 0 0 0 7.5 8" style="fill:none;stroke:var(--illo-hi);stroke-width:3;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="il-energy" viewBox="0 0 64 64">
+    <rect x="9" y="19" width="42" height="28" rx="6" style="fill:var(--illo-b)"/>
+    <rect x="51" y="28" width="5" height="10" rx="2" style="fill:var(--illo-s)"/>
+    <path d="M33.5 23L23.5 35.5h8L29 44l11-13h-8z" style="fill:var(--illo-a)"/>
+  </symbol>
+  <symbol id="il-cool" viewBox="0 0 64 64">
+    <circle cx="32" cy="28" r="20" style="fill:none;stroke:var(--illo-s);stroke-width:3"/>
+    <ellipse cx="32" cy="18.5" rx="5.5" ry="9" style="fill:var(--illo-b)"/>
+    <ellipse cx="32" cy="18.5" rx="5.5" ry="9" transform="rotate(120 32 28)" style="fill:var(--illo-b)"/>
+    <ellipse cx="32" cy="18.5" rx="5.5" ry="9" transform="rotate(240 32 28)" style="fill:var(--illo-b)"/>
+    <circle cx="32" cy="28" r="4" style="fill:var(--illo-a)"/>
+    <path d="M32 48v8M24 57h16" style="fill:none;stroke:var(--illo-s);stroke-width:3.2;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="il-hygiene" viewBox="0 0 64 64">
+    <rect x="10" y="32" width="36" height="21" rx="9" style="fill:var(--illo-a)"/>
+    <path d="M17 39h12" style="fill:none;stroke:var(--illo-hi);stroke-width:3;stroke-linecap:round"/>
+    <circle cx="45" cy="21" r="7.5" style="fill:var(--illo-b)"/>
+    <circle cx="29" cy="20" r="5" style="fill:var(--illo-b)"/>
+    <circle cx="53" cy="34" r="4" style="fill:var(--illo-b)"/>
+    <path d="M42.5 18.5a3 3 0 0 1 3-2" style="fill:none;stroke:var(--illo-hi);stroke-width:2;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="il-thermos" viewBox="0 0 64 64">
+    <rect x="22" y="8" width="20" height="8" rx="3" style="fill:var(--illo-a)"/>
+    <path d="M20 18h24v34a5 5 0 0 1-5 5H25a5 5 0 0 1-5-5z" style="fill:var(--illo-b)"/>
+    <path d="M26 26v22" style="fill:none;stroke:var(--illo-hi);stroke-width:3;stroke-linecap:round"/>
+    <path d="M20 18h24" style="fill:none;stroke:var(--illo-s);stroke-width:3;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="il-lamp" viewBox="0 0 64 64">
+    <circle cx="32" cy="34" r="16" style="fill:var(--illo-a);opacity:.35"/>
+    <rect x="24" y="22" width="16" height="24" rx="6" style="fill:var(--illo-a)"/>
+    <path d="M26 16h12M32 10v6M22 50h20" style="fill:none;stroke:var(--illo-s);stroke-width:3.2;stroke-linecap:round"/>
+    <path d="M29 30v8" style="fill:none;stroke:var(--illo-hi);stroke-width:3;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="il-box" viewBox="0 0 64 64">
+    <path d="M10 22l22-10 22 10v24L32 56 10 46z" style="fill:var(--illo-b)"/>
+    <path d="M10 22l22 10 22-10M32 32v24" style="fill:none;stroke:var(--illo-s);stroke-width:3;stroke-linejoin:round"/>
+    <path d="M20 17l22 10v8" style="fill:none;stroke:var(--illo-a);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
+  </symbol>
+
+  <!-- Абстрактні «портрети» вчених: символ принципу, не зображення людини -->
+  <symbol id="p-joule" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" style="fill:var(--illo-bg)"/>
+    <path d="M26 9l-9 14h7l-2 11 10-15h-7z" style="fill:var(--illo-a)"/>
+    <path d="M12 38c2-2 4 2 6 0s4 2 6 0 4 2 6 0 4 2 6 0" style="fill:none;stroke:var(--illo-s);stroke-width:2.2;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="p-faraday" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" style="fill:var(--illo-bg)"/>
+    <path d="M13 12v12a7 7 0 0 0 14 0V12" style="fill:none;stroke:var(--illo-b);stroke-width:5;stroke-linecap:butt"/>
+    <path d="M13 12h0M27 12h0" style="stroke:var(--illo-a);stroke-width:5;stroke-linecap:round"/>
+    <path d="M31 20c4 0 4 4 0 4s-4 4 0 4 4 4 0 4" style="fill:none;stroke:var(--illo-s);stroke-width:2.2;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="p-carnot" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" style="fill:var(--illo-bg)"/>
+    <rect x="15" y="12" width="14" height="24" rx="2" style="fill:none;stroke:var(--illo-s);stroke-width:2.2"/>
+    <rect x="15" y="20" width="14" height="5" style="fill:var(--illo-a)"/>
+    <path d="M22 25v9M33 16a8 8 0 0 1 0 16" style="fill:none;stroke:var(--illo-b);stroke-width:2.6;stroke-linecap:round"/>
+    <path d="M31 31l2 1.5-1 2" style="fill:none;stroke:var(--illo-b);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"/>
+  </symbol>
+  <symbol id="p-fourier" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" style="fill:var(--illo-bg)"/>
+    <rect x="17" y="12" width="4" height="24" rx="1.5" style="fill:var(--illo-b)"/>
+    <rect x="23" y="12" width="4" height="24" rx="1.5" style="fill:var(--illo-b);opacity:.75"/>
+    <rect x="29" y="12" width="4" height="24" rx="1.5" style="fill:var(--illo-b);opacity:.5"/>
+    <path d="M9 24h28" style="fill:none;stroke:var(--illo-a);stroke-width:3;stroke-linecap:round"/>
+    <path d="M34 20.5l4 3.5-4 3.5" style="fill:none;stroke:var(--illo-a);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"/>
+  </symbol>
+  <symbol id="p-newton" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" style="fill:var(--illo-bg)"/>
+    <path d="M12 26h17v4a6 6 0 0 1-6 6h-5a6 6 0 0 1-6-6z" style="fill:var(--illo-b)"/>
+    <path d="M29 28h2a3 3 0 0 1 0 6h-1" style="fill:none;stroke:var(--illo-s);stroke-width:2.2"/>
+    <path d="M14 12c4 0 6 6 10 8.5S33 23 38 23" style="fill:none;stroke:var(--illo-a);stroke-width:2.6;stroke-linecap:round"/>
+  </symbol>
+  <symbol id="p-einstein" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="23" style="fill:var(--illo-bg)"/>
+    <path d="M24 10a9 9 0 0 0-5 16.5V30h10v-3.5A9 9 0 0 0 24 10z" style="fill:var(--illo-a)"/>
+    <path d="M20 34h8M21.5 37.5h5" style="fill:none;stroke:var(--illo-s);stroke-width:2.2;stroke-linecap:round"/>
+    <circle cx="36" cy="14" r="2" style="fill:var(--illo-b)"/>
+    <circle cx="39.5" cy="9.5" r="1.4" style="fill:var(--illo-b)"/>
+  </symbol>
+</svg>
 </body>
 </html>

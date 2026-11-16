@@ -1,0 +1,95 @@
+{
+  "id": "./",
+  "name": "Автономно — рішення без комунальних послуг",
+  "short_name": "Автономно",
+  "description": "Практичні й безпечні рішення, коли немає світла, газу, опалення, води чи зв’язку, і під час повітряної тривоги. Працює без інтернету.",
+  "lang": "uk",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8F5EF",
+  "theme_color": "#F8F5EF",
+  "categories": [
+    "utilities",
+    "lifestyle",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Повітряна тривога: я в укритті",
+      "short_name": "Укриття",
+      "url": "./#/shelter",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Перша допомога",
+      "short_name": "Допомога",
+      "url": "./#/aid",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Мені холодно",
+      "short_name": "Холодно",
+      "url": "./#/need/heat",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Тривожна валізка",
+      "short_name": "Валізка",
+      "url": "./#/bag",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
