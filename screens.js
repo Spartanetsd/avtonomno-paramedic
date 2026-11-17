@@ -14,7 +14,7 @@ import { readyHtml } from './shelterui.js';
 
 /** @typedef {{title:string, html:string, tab:string, after?:() => void}} View */
 
-const VERSION = '2.3.0';
+const VERSION = '2.3.1';
 
 /* ───────────── Допоміжні ───────────── */
 
@@ -666,6 +666,7 @@ function offlineDetails(sw) {
       ${sw.version ? `<li>Версія кешу: <b>${esc(sw.version)}</b></li>` : ''}
       <li>Локальне сховище: <b>${store.isPersistent() ? 'працює' : 'недоступне'}</b></li>
     </ul>
+    ${sw.failed ? `<p class="ob off">${icon('i-info')}<b>Оновлення ${esc(sw.failed.version.replace('avtonomno-v', ''))} не встановилося</b></p><p class="muted">На сайті бракує файлів: ${sw.failed.missing.map((f) => esc(f)).join(', ')}. Завантажте їх у репозиторій — застосунок оновиться сам.</p>` : ''}
     ${sw.install ? `<button class="btn primary" type="button" data-act="install">${icon('i-download')}<span>Встановити застосунок</span></button>` : ''}`;
 }
 

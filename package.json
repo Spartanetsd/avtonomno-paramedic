@@ -1,6 +1,6 @@
 {
   "name": "avtonomno",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "private": true,
   "description": "Автономно — офлайн-помічник для життя без світла, газу, води й зв’язку (PWA)",
   "type": "module",

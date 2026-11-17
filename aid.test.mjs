@@ -108,6 +108,10 @@ test('сайт проєкту pro.html: зв’язаний із застосу�
   const sw = read('sw.js');
   for (const f of ['pro.html', 'landing.css', 'policeman-paramedic.webp', 'aid.js', 'aidui.js']) assert.ok(sw.includes(`'./${f}'`), `sw: ${f}`);
   assert.match(sw, /PAGES = \['\.\/pro\.html'\]/, 'сайт проєкту не підміняється оболонкою застосунку');
+  const core = sw.slice(sw.indexOf('const CORE'), sw.indexOf('];', sw.indexOf('const CORE')));
+  for (const f of ['pro.html', 'landing.css', 'policeman-paramedic.webp']) assert.ok(!core.includes(f), `${f} — необов’язковий, не блокує оновлення застосунку`);
+  assert.match(sw, /const EXTRA = \['\.\/pro\.html', '\.\/landing\.css', '\.\/policeman-paramedic\.webp'\]/);
+  assert.match(sw, /INSTALL_FAILED/, 'невдале оновлення не мовчить');
   assert.match(read('pages-deploy.yml'), /cp \*\.html \*\.css /, 'робочий процес публікує pro.html і landing.css');
   const photo = readFileSync(new URL('./policeman-paramedic.webp', import.meta.url));
   assert.equal(photo.toString('ascii', 8, 12), 'WEBP');

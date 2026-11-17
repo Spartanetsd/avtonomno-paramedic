@@ -605,9 +605,23 @@ function hideToast() {
 
 /* ───────────── Офлайн-режим (реальний стан Service Worker) ───────────── */
 
-/** @type {{status:'checking'|'ready'|'partial'|'unsupported'|'error', cached:number, total:number, picsCached:number, picsTotal:number, version:string, reg: ServiceWorkerRegistration|null, install: any}} */
-const swInfo = { status: 'checking', cached: 0, total: 0, picsCached: 0, picsTotal: 0, version: '', reg: null, install: null };
+/** @type {{status:'checking'|'ready'|'partial'|'unsupported'|'error', cached:number, total:number, picsCached:number, picsTotal:number, version:string, reg: ServiceWorkerRegistration|null, install: any, failed: {version:string, missing:string[]}|null}} */
+const swInfo = { status: 'checking', cached: 0, total: 0, picsCached: 0, picsTotal: 0, version: '', reg: null, install: null, failed: null };
 let reloading = false;
+/** Коли відкрито сторінку: оновлення, знайдене одразу після запуску, ставимо без питань. */
+const openedAt = Date.now();
+let lastUpdateCheck = Date.now();
+
+/** Щойно відкрили застосунок і ще нічого не вводять — нову версію можна ставити одразу. */
+function justOpened() {
+  const a = document.activeElement;
+  return Date.now() - openedAt < 6000 && !(a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName));
+}
+
+function offerUpdate() {
+  if (justOpened()) { applyUpdate(); return; }
+  app.toast('Доступна нова версія застосунку', { action: 'sw-update', label: 'Оновити' });
+}
 
 function offlineBadge() {
   const net = navigator.onLine ? '' : ' · зараз без інтернету';
@@ -639,12 +653,26 @@ async function initSW() {
     reg.addEventListener('updatefound', () => {
       const nw = reg.installing;
       nw?.addEventListener('statechange', () => {
-        if (nw.state === 'installed' && navigator.serviceWorker.controller) app.toast('Доступна нова версія застосунку', { action: 'sw-update', label: 'Оновити' });
+        if (nw.state === 'installed' && navigator.serviceWorker.controller) offerUpdate();
         if (nw.state === 'activated') checkOffline();
       });
     });
-    if (reg.waiting && navigator.serviceWorker.controller) app.toast('Доступна нова версія застосунку', { action: 'sw-update', label: 'Оновити' });
-    navigator.serviceWorker.addEventListener('message', (e) => { if (e.data && e.data.type === 'CACHED') checkOffline(); });
+    if (reg.waiting && navigator.serviceWorker.controller) offerUpdate();
+    navigator.serviceWorker.addEventListener('message', (e) => {
+      const d = e.data || {};
+      if (d.type === 'CACHED') { swInfo.failed = null; checkOffline(); }
+      // Нова версія не встановилася: сервер не віддав частину файлів. Показуємо в «Про застосунок»
+      if (d.type === 'INSTALL_FAILED' && Array.isArray(d.missing) && d.missing.length && d.missing.length < d.total) {
+        swInfo.failed = { version: String(d.version || ''), missing: d.missing.slice(0, 12).map(String) };
+        refreshBadge();
+      }
+    });
+    // Телефон тримає застосунок у фоні днями: перевіряємо оновлення, коли до нього повертаються
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState !== 'visible' || !navigator.onLine || Date.now() - lastUpdateCheck < 30 * 60000) return;
+      lastUpdateCheck = Date.now();
+      reg.update().catch(() => {});
+    });
     navigator.serviceWorker.addEventListener('controllerchange', () => { if (reloading) location.reload(); else checkOffline(); });
     await navigator.serviceWorker.ready;
     checkOffline();

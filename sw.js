@@ -5,7 +5,7 @@
 // з кожною версією коду. Нова картинка дозберігається сама (кеш доповнюється лише відсутніми),
 // а замінили наявну — збільште PICS_CACHE.
 
-const VERSION = 'avtonomno-v2.3.0';
+const VERSION = 'avtonomno-v2.3.1';
 const PICS_CACHE = 'avtonomno-pics-v1';
 const PREFIX = 'avtonomno-';
 
@@ -31,9 +31,6 @@ const CORE = [
   './qr.js',
   './aid.js',
   './aidui.js',
-  './pro.html',
-  './landing.css',
-  './policeman-paramedic.webp',
   './manifest.webmanifest',
   './icon.svg',
   './icon-192.png',
@@ -88,7 +85,12 @@ const PICS = [
   './pic-after.webp',
 ];
 
+// Сайт проєкту — необов’язкові файли: якщо їх немає на сервері (наприклад, робочий процес
+// GitHub Actions їх не скопіював), застосунок однаково оновлюється, а не лишається на старій версії.
+const EXTRA = ['./pro.html', './landing.css', './policeman-paramedic.webp'];
+
 const urls = CORE.map((p) => new URL(p, self.location).href);
+const extraUrls = EXTRA.map((p) => new URL(p, self.location).href);
 // Окремі сторінки, які відкриваються як є, а не оболонкою застосунку: сайт проєкту
 const PAGES = ['./pro.html'].map((p) => new URL(p, self.location).href);
 const picUrls = PICS.map((p) => new URL(p, self.location).href);
@@ -97,7 +99,20 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(VERSION);
     // cache: 'reload' — оминаємо HTTP-кеш, щоб зберегти саме нову версію
-    await cache.addAll(urls.map((u) => new Request(u, { cache: 'reload' })));
+    try {
+      await cache.addAll(urls.map((u) => new Request(u, { cache: 'reload' })));
+    } catch (err) {
+      // Без цього оновлення «мовчки» не стається: розповідаємо відкритим сторінкам, яких файлів бракує
+      const missing = await missingFiles();
+      const all = await self.clients.matchAll({ includeUncontrolled: true });
+      all.forEach((c) => c.postMessage({ type: 'INSTALL_FAILED', version: VERSION, missing, total: urls.length }));
+      await caches.delete(VERSION); // недобудований кеш не лишаємо
+      throw err;
+    }
+    await Promise.allSettled(extraUrls.map(async (u) => {
+      const res = await fetch(new Request(u, { cache: 'reload' }));
+      if (res.ok) await cache.put(u, res);
+    }));
     const clients = await self.clients.matchAll({ includeUncontrolled: true });
     clients.forEach((c) => c.postMessage({ type: 'CACHED', version: VERSION }));
     // Перше встановлення активуємо одразу; оновлення чекає підтвердження користувача
@@ -112,6 +127,17 @@ self.addEventListener('activate', (event) => {
     await self.clients.claim();
   })());
 });
+
+/** Файли застосунку, яких сервер не віддав (короткі імена). */
+async function missingFiles() {
+  const out = [];
+  await Promise.all(urls.map(async (u) => {
+    let ok = false;
+    try { ok = (await fetch(new Request(u, { cache: 'reload' }))).ok; } catch { ok = false; }
+    if (!ok) out.push(u.slice(self.registration.scope.length) || 'index.html');
+  }));
+  return out.sort();
+}
 
 /** Зберегти відсутні ілюстрації. Помилка однієї картинки не заважає іншим і не ламає застосунок. */
 async function cachePics() {
@@ -163,7 +189,11 @@ self.addEventListener('fetch', (event) => {
       if (PAGES.includes(clean)) {
         const page = await cache.match(clean);
         if (page) return page;
-        try { return await fetch(req); } catch { /* немає мережі — далі оболонка застосунку */ }
+        try {
+          const res = await fetch(req);
+          if (res.ok && res.type === 'basic') cache.put(clean, res.clone());
+          return res;
+        } catch { /* немає мережі — далі оболонка застосунку */ }
       }
       const shell = (await cache.match(new URL('./index.html', self.location).href)) || (await cache.match(new URL('./', self.location).href));
       if (shell) return shell;
@@ -196,7 +226,7 @@ self.addEventListener('fetch', (event) => {
     if (hit) return hit;
     try {
       const res = await fetch(req);
-      if (res.ok && res.type === 'basic' && urls.includes(clean)) cache.put(req, res.clone());
+      if (res.ok && res.type === 'basic' && (urls.includes(clean) || extraUrls.includes(clean))) cache.put(req, res.clone());
       return res;
     } catch {
       return new Response('', { status: 504, statusText: 'Offline' });
